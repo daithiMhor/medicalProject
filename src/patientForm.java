@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /* decided to use grid layout as it was the easiest and simplest way I could set the form.
 without having to directly set every piece of the form.  */
@@ -17,7 +18,10 @@ public class patientForm {
     JFrame frame; //creating globally
     JButton newSubmitButton, newCancelButton;  // reference two seperate methods so needs to be set globally
 
-    // so I can make my textfields global so access them from another method.
+    static ArrayList<patient> allpatients = new ArrayList<>();
+
+
+
 
     JTextField fnameField;
     JTextField snameField;
@@ -200,11 +204,16 @@ public class patientForm {
               // medicalCard.isSelected();  for some insane reason this seems to work after tearing my hair out !
 
 
-
                 patient p = new patient(fname, sname, address, town, ppsn, phoneNumber,  medicalCard.isSelected(), doctor1);
-                count++;
 
-                patient[] allpatients = new patient[count];
+               allpatients.add(p);
+
+
+               frame.setVisible(false);
+               new guiClass();
+
+
+
 
 
 

@@ -78,7 +78,16 @@ public class guiClass {
             else if(e.getSource()==viewAccountButton)
                 System.out.println("view button clicked");
             else if(e.getSource()==appointmentAccountButton)
-                System.out.println("AppointButtonClicked");
+
+                // displaying the array
+
+                for (int i =0; i < patientForm.allpatients.size(); i++){
+                    JOptionPane.showMessageDialog(null, patientForm.allpatients.get(i).getFname());
+                }
+
+
+
+
             else
                 System.out.println("remove button clicked");
         }
