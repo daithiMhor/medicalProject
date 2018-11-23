@@ -12,19 +12,19 @@ public class patient extends person {
     private doctor doc;
 
 
-    public patient ( String unknown , boolean b, doctor doc ) {
+    public patient ( boolean b, doctor doc ) {
         id++;
         setPatientID(String.valueOf(id));
         setMedicalCard(true);
         setDoc(doc);
     }
 
-    public patient ( String fname , String sname , String address , String town , String ppsn , int phoneNumber /*,String patientID*/ , boolean medicalCard, doctor doc ) {
+    public patient ( String fname , String sname , String address , String town , String ppsn , int phoneNumber /*,String patientID*/ , boolean medicalCard, doctor doc) {
         super(fname, sname, address, town, ppsn, phoneNumber);
         id++;
         this.patientID = String.valueOf(id);
         this.medicalCard = medicalCard;
-        this.doc = doc;
+        //this.doc = doc;
         //
 
 

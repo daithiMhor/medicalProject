@@ -87,7 +87,7 @@ public class person {
             return address;
         }
 
-    public void setAddress(String sname){
+    public void setAddress(String address){
         if (!address.equals(""))
             this.address = address;
         else
@@ -100,14 +100,21 @@ public class person {
             return town;
         }
 
-        public void setTown(String town) {
+    // from here
+    public void setTown(String town) {
+        this.town = town;
+    }
+    //to here is the same as bellow
+
+
+     /*  public void setTown(String town) {
             if (!town.equals(""))
             this.town = town;
             else
                 JOptionPane.showMessageDialog(null, "Please type in a town, this is a mandatory field" ,"Warning",
                         JOptionPane.ERROR_MESSAGE);
         } //closes off town error message validation
-
+*/
 
         public String getPpsn() {
             return ppsn;

@@ -47,6 +47,8 @@ public class guiClass {
 
         ButtonEventHandler buttonHandler = new ButtonEventHandler();
 
+        // creates the handlers for the four buttons
+
         newAccountButton.addActionListener(buttonHandler);
         viewAccountButton.addActionListener(buttonHandler);
         removeAccountButton.addActionListener(buttonHandler);
@@ -67,7 +69,10 @@ public class guiClass {
         public void actionPerformed(ActionEvent e)
         {
             if(e.getSource()==newAccountButton) {
-                System.out.println("Account button clicked");
+
+                new patientForm();     //this creates a new patient form, small bit of help from Jason Dowling !
+
+                //System.out.println("Account button clicked"); that was in earlier versions I knew where event handling was
 
             }
             else if(e.getSource()==viewAccountButton)

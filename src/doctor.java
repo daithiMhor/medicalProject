@@ -7,14 +7,14 @@ public class doctor extends person{
     String doctorID;
     String name;
 
-    public doctor(String doctorID, String name) {
+    public doctor() {
             setDoctorID("Unknown");
             setName("Unknown");
         }
 
         // no argument constructor
 
-    public doctor () {
+    public doctor (String doctorID, String name) {
         this.doctorID = doctorID;
         this.name = name;
     }
