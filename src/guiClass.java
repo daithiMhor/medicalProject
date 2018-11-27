@@ -110,16 +110,5 @@ public class guiClass {
     }
 
 
-
-    /*private static int linearSearch(String usernames[], String username)
-    {
-        for (int i = 0; i < usernames.length; i++)
-        {
-            if(usernames[i]!=null && usernames[i].equals(username))
-                return i;
-        }
-
-        return -1;
-    }*/
-}
+} // closes gui class
 

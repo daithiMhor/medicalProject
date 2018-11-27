@@ -19,11 +19,13 @@ public class patient extends person {
         setDoc(doc);
     }
 
-    public patient ( String fname , String sname , String address , String town , String ppsn , int phoneNumber /*,String patientID*/ , boolean medicalCard, doctor doc) {
+    public patient ( String fname , String sname , String address , String town , String ppsn , String phoneNumber /*,String patientID*/ , boolean medicalCard, doctor doc) {
         super(fname, sname, address, town, ppsn, phoneNumber);
-        id++;
-        this.patientID = String.valueOf(id);
-        this.medicalCard = medicalCard;
+        if(getInvalidFieldData().equals("")) //test added by JB to ensure id value remains consistent
+            id++;
+        setPatientID(String.valueOf(id));
+        setMedicalCard(true);
+        setDoc(doc);
         //this.doc = doc;
         //
 
@@ -37,8 +39,8 @@ public class patient extends person {
 
     @Override
     public String toString () {
-        return "\nPatientID: " + patientID + "\n" +
-                "Medical Card:  " + medicalCard;
+        return super.toString() + "\nPatientID: " + patientID + "\n" +
+                "Medical Card:  " + medicalCard + "\n\nDoctor details: " + doc;
     }
 
     public String getPatientID () {

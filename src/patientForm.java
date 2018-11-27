@@ -1,5 +1,7 @@
 /* David Hopkins Medical project for java 2018.
  final patent form.  I am leaving in commented out earlier versions of the code
+ importing the javax for the dialog b/* David Hopkins Medical project for java 2018.
+ final patent form.  I am leaving in commented out earlier versions of the code
  importing the javax for the dialog boxes */
 
 import javax.swing.*;
@@ -33,7 +35,10 @@ public class patientForm {
 
 
 
-    public static void main2(String[] args) {
+  /* This was earlier test code.  Commentted out !
+
+   public static void main2(String[] args) {
+
 
         // creating a user input for patients
 
@@ -66,15 +71,15 @@ public class patientForm {
 
     doctor doc = new doctor();
 
-    patients[count] = new patient(fname, sname, address, town, ppsn, phoneNumber/*, patientID*/,  medicalCard, doc);
+    patients[count] = new patient(fname, sname, address, town, ppsn, phoneNumber/*, patientID*//*,  medicalCard, doc);
     count++;
 
     answer = JOptionPane.showInputDialog("Do you have a patient to enter ? please answer yes or no");
-}
+    }
 
 
     display();
-}// closing off main
+    }// closing off main*/
 
     public static void display() {
 
@@ -192,25 +197,64 @@ public class patientForm {
                 // create dummy doctor for now
 
 
-                doctor doctor1 = new doctor();
+                doctor doctor1 = new doctor("Joe","Bloggs","Anyplace","Anytown","1234567AB","0667123456","123");
 
                 // creating patient from text boxes
-              String fname = fnameField.getText();
-              String sname = snameField.getText();
-              String address = addressField.getText();
-              String town = townField.getText();
-              String ppsn = ppsnField.getText();
-              int phoneNumber = Integer.parseInt(phoneNumberField.getText());
-              // medicalCard.isSelected();  for some insane reason this seems to work after tearing my hair out !
+                String fname = fnameField.getText();
+                String sname = snameField.getText();
+                String address = addressField.getText();
+                String town = townField.getText();
+                String ppsn = ppsnField.getText();
 
+                //JB Advice - you can validate phone number if you want to add some extra complexity
+                //Take the phone number from the text-field, as a String, and then do some checks on it
+                //e.g. must begin with 3-digit area code, then a space or dash, followed by say 7 or 8 more digits
+                //So when the submit button is clicked, you'll take the value and have the validation right here, within
+                //this method (you could have a separate method called isValidPhoneNumber(String num) to do this too
+                //if you wish. If the phone-number is valid then other fields will be validated through their setter methods
+                //and if the phone-number is invalid you can put out on message dialog to indicate the problem with the number
+                //I have added a "skeleton" validation test, called in the person class setPhoneNumber(), see if you
+                //can do the validation for the isValidPhoneNumber(String num) method
+
+
+                String phoneNumber = phoneNumberField.getText();
+
+                medicalCard.isSelected();  //for some insane reason this seems to work after tearing my hair out !
+
+
+                //JB Advice - if all the fields have good values then a new patient object will get created with the values
+                //taken from the text-fields (for most of the arguments, they will be validated through the setter method that
+                //corresponds to it and a message dialog will display to indicate any problems. You could have a String attribute
+                //called invalidFieldData in the patient class that would be initialised to empty string and, as each field is
+                //validated, if it turns out to be invalid, the corresponding setter method could add information on to this
+                //attribute. I've added some code to person class to reflect this.
 
                 patient p = new patient(fname, sname, address, town, ppsn, phoneNumber,  medicalCard.isSelected(), doctor1);
 
-               allpatients.add(p);
+                if(p.getInvalidFieldData().equals("")){
+
+                    JOptionPane.showMessageDialog(null, "All data entered was good - patient now created" ,"Patient Created!",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    allpatients.add(p);
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "Some of the data entered was bad as follows:\n\n" + p.getInvalidFieldData() ,"Warning",
+                            JOptionPane.ERROR_MESSAGE);
+
+                allpatients.add(p);
+
+                //quick tests - what is the size of the array list now? If there was anything wrong with the data, then the patient object will not
+                //be added to the arraylist so its size remains the same as before
+
+                System.out.println(allpatients.size());
+
+                //if there are patient objects in the array list, what values do they contain?
+                for(patient pat: allpatients)
+                    System.out.println(pat);
 
 
-               frame.setVisible(false);
-               new guiClass();
+                frame.setVisible(false);
+                new guiClass();
 
 
 
@@ -219,15 +263,15 @@ public class patientForm {
 
 
 
-            //System.out.println("Account button clicked"); that was in earlier versions I knew where event handling was
-            // in latest version this is where I plan to save patient details !
+                //System.out.println("Account button clicked"); that was in earlier versions I knew where event handling was
+                // in latest version this is where I plan to save patient details !
             }
 
 
             // cancel button closes patientfrom and reopens gui class
 
             else if(e.getSource()==newCancelButton) {
-            frame.setVisible(false);
+                frame.setVisible(false);
                 new guiClass();  //  !
             }
         }
