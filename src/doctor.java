@@ -38,7 +38,7 @@ public class doctor extends person{
 
     public String getName() {
         return name;
-    }// close last getname class
+    }// close last getname class  THIS WAS ALL MY OWN CODE, below JB improved it
 
 
 
