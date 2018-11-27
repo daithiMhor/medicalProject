@@ -190,8 +190,11 @@ public class person {
 
     //skeleton of this routine created by JB, Dave to complete hopefully
     private boolean isValidPhoneNumber(String phoneNumber) {
-            //while(isValidPhoneNumber(phoneNumber)){
-            //    if(phoneNumber.length()==(13))
+            if(phoneNumber.length()>=(10) && phoneNumber.length()<=(13));
+                else{
+            invalidFieldData+="Please type in a suitable Mobile Value\n";
+            JOptionPane.showMessageDialog(null, "Please type in between 10 and 13 digits" ,"Warning",
+                    JOptionPane.ERROR_MESSAGE);}
 
 
         return true; //dummy return value - we'll say for now the value entered is valid (even if it is actually invalid)
