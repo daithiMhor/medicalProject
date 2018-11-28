@@ -1,9 +1,15 @@
-import javax.swing.*;
+
+
+
 
 /** Created by David Hopkins 05/11/2018
  * This is the person class
  * As part of the Object Orientated Element of Software Development Year 2.
  */
+
+import javax.swing.*;
+
+
 public class person {
 
     private String fname;
@@ -11,7 +17,7 @@ public class person {
     private String address;
     private String town;
     private String ppsn;
-    private int phoneNumber;
+    private String phoneNumber;  //reason foor the crash in the presentation
     private String invalidFieldData=""; //JB added this attribute to track invalid text-field inputs
 
 
@@ -35,9 +41,7 @@ public class person {
         //this.ppsn = ppsn;
         setPpsn(ppsn);
 
-
-
-        //this.phoneNumber = phoneNumber;
+        /* this.phoneNumber = phoneNumber; */
         setPhoneNumber(phoneNumber);
 
         //use the setters here for validation purposes
@@ -172,32 +176,33 @@ public class person {
             //return false; //dummy return value - we'll say for now the value entered is valid (even if it is actually invalid)
     //}  // closes off the while statement
 
-
-
-
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber){
 
-                if(!isValidPhoneNumber(phoneNumber))
-            invalidFieldData+="Invalid phone number entered - must have the correct format\n";
-        else
-            this.phoneNumber = Integer.parseInt(phoneNumber); //assuming phoneNumber stays as an integer attribute
+                if(!isValidPhoneNumber(phoneNumber)) {
+                    invalidFieldData+="Please type in a suitable Mobile Value\n";
+                    JOptionPane.showMessageDialog(null, "Please type in between 10 and 13 digits" ,"Warning",
+                            JOptionPane.ERROR_MESSAGE);}
+
+
+                else {this.phoneNumber = phoneNumber; }//assuming phoneNumber stays as an integer attribute
 
     }
 
     //skeleton of this routine created by JB, Dave to complete hopefully
     private boolean isValidPhoneNumber(String phoneNumber) {
-            if(phoneNumber.length()>=(10) && phoneNumber.length()<=(13));
-                else{
-            invalidFieldData+="Please type in a suitable Mobile Value\n";
-            JOptionPane.showMessageDialog(null, "Please type in between 10 and 13 digits" ,"Warning",
-                    JOptionPane.ERROR_MESSAGE);}
+            if(phoneNumber.length()>=(10) && phoneNumber.length()<=(13)){
+                return true;
+            }
+                else {
+                    return false;
+            }
 
 
-        return true; //dummy return value - we'll say for now the value entered is valid (even if it is actually invalid)
+
     }
 
     public String getInvalidFieldData()

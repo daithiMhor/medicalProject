@@ -80,10 +80,8 @@ public class guiClass {
             else if(e.getSource()==appointmentAccountButton)
 
                 // displaying the array
+                appointmentManager.main(null);
 
-                for (int i =0; i < patientForm.allpatients.size(); i++){
-                    JOptionPane.showMessageDialog(null, patientForm.allpatients.get(i).getFname());
-                }
 
 
 

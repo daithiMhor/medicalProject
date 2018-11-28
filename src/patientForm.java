@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 
 /* decided to use grid layout as it was the easiest and simplest way I could set the form.
@@ -23,8 +24,6 @@ public class patientForm {
     static ArrayList<patient> allpatients = new ArrayList<>();
 
 
-
-
     JTextField fnameField;
     JTextField snameField;
     JTextField addressField;
@@ -32,8 +31,6 @@ public class patientForm {
     JTextField ppsnField;
     JTextField phoneNumberField;
     JRadioButton medicalCard;
-
-
 
   /* This was earlier test code.  Commentted out !
 
@@ -76,8 +73,6 @@ public class patientForm {
 
     answer = JOptionPane.showInputDialog("Do you have a patient to enter ? please answer yes or no");
     }
-
-
     display();
     }// closing off main*/
 
@@ -101,19 +96,17 @@ public class patientForm {
 
     }  // closes the display method
 
-    public patientForm()
-    {
+    public patientForm() {
 
         //JB a little help here. Set sizes from last years labsheets.
 
         frame = new JFrame("Patient Details");
-        frame.setSize(500,500);
+        frame.setSize(500, 500);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-
-        frame.setLayout(new GridLayout(9,1));
+        frame.setLayout(new GridLayout(9, 1));
 
        /* JLabel patientIDLabel = new JLabel("Patient ID:");
         frame.add(patientIDLabel);
@@ -191,13 +184,12 @@ public class patientForm {
 
     private class ButtonEventHandler implements ActionListener {
 
-        public void actionPerformed(ActionEvent e)
-        {
-            if(e.getSource()== newSubmitButton) {
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == newSubmitButton) {
                 // create dummy doctor for now
 
 
-                doctor doctor1 = new doctor("Joe","Bloggs","Anyplace","Anytown","1234567AB","0667123456","123");
+                doctor doctor1 = new doctor("Joe", "Bloggs", "Anyplace", "Anytown", "1234567AB", "0667123456", "123");
 
                 // creating patient from text boxes
                 String fname = fnameField.getText();
@@ -229,16 +221,15 @@ public class patientForm {
                 //validated, if it turns out to be invalid, the corresponding setter method could add information on to this
                 //attribute. I've added some code to person class to reflect this.
 
-                patient p = new patient(fname, sname, address, town, ppsn, phoneNumber,  medicalCard.isSelected(), doctor1);
+                patient p = new patient(fname, sname, address, town, ppsn, phoneNumber, medicalCard.isSelected(), doctor1);
 
-                if(p.getInvalidFieldData().equals("")){
+                if (p.getInvalidFieldData().equals("")) {
 
-                    JOptionPane.showMessageDialog(null, "All data entered was good - patient now created" ,"Patient Created!",
+                    JOptionPane.showMessageDialog(null, "All data entered was good - patient now created", "Patient Created!",
                             JOptionPane.INFORMATION_MESSAGE);
                     allpatients.add(p);
-                }
-                else
-                    JOptionPane.showMessageDialog(null, "Some of the data entered was bad as follows:\n\n" + p.getInvalidFieldData() ,"Warning",
+                } else
+                    JOptionPane.showMessageDialog(null, "Some of the data entered was bad as follows:\n\n" + p.getInvalidFieldData(), "Warning",
                             JOptionPane.ERROR_MESSAGE);
 
                 allpatients.add(p);
@@ -249,18 +240,12 @@ public class patientForm {
                 System.out.println(allpatients.size());
 
                 //if there are patient objects in the array list, what values do they contain?
-                for(patient pat: allpatients)
+                for (patient pat : allpatients)
                     System.out.println(pat);
 
 
                 frame.setVisible(false);
                 new guiClass();
-
-
-
-
-
-
 
 
                 //System.out.println("Account button clicked"); that was in earlier versions I knew where event handling was
@@ -270,7 +255,7 @@ public class patientForm {
 
             // cancel button closes patientfrom and reopens gui class
 
-            else if(e.getSource()==newCancelButton) {
+            else if (e.getSource() == newCancelButton) {
                 frame.setVisible(false);
                 new guiClass();  //  !
             }
@@ -285,7 +270,44 @@ public class patientForm {
         this.newCancelButton = newCancelButton;
     }
 
+    //to save the patient file, Jason Dowling with a little help
+    public static void savePatient(ArrayList<patient> patient) throws IOException {
+        File file = new File("Patient.dat");
+        FileOutputStream FOS = new FileOutputStream(file);
+        ObjectOutputStream OOS = new ObjectOutputStream(FOS);
+
+        OOS.writeObject(patient);
+        OOS.close();
+
+    } // closes main static void save file
 
 
+    // to open the patient file
+    public static void OpenPatient() {
+        try {
+            File file = new File("Patient.dat");
+            FileInputStream FIS = new FileInputStream(file);
+            ObjectInputStream OIS = new ObjectInputStream(FIS);
 
+            allpatients = (ArrayList<patient>) OIS.readObject();
+            OIS.close();
+
+
+        } // closes the try
+        // John Walsh code
+        catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "FileNotFound: didn't work");
+            e.printStackTrace();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "IOException: didn't work");
+            e.printStackTrace();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "open didn't work");
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
+

@@ -1,3 +1,9 @@
+/* David Hopkins 2018, medical project.  Appointmeanager with some validation in it
+   using the action listener links in with GUi class
+
+ */
+
+
 import javax.swing.*;
 
 public class appointmentManager extends patientForm {
@@ -22,17 +28,18 @@ public class appointmentManager extends patientForm {
         //using x  as the sentinal value
 
         appointDate = JOptionPane.showInputDialog("Please enter a date for the appointment in the form dd-mm-yyyy (x to exit ");
-        while(!appointDate.equals("x"))
+        if(!appointDate.equals("x"))
         {
-            while(!appointDate.equals("x") && !isValidDate(appointDate))
-                appointDate = JOptionPane.showInputDialog("Invalid! Please re-enter the date of birth in the form dd-mm-yyyy (x to exit): ");
-
-
+            while(!isValidDate(appointDate)) {
+                appointDate = JOptionPane.showInputDialog("Invalid! Please re-enter the date of the appointment in the form dd-mm-yyyy (x to exit): ");
+            }
             JOptionPane.showMessageDialog(null, "The appointment time for " + fname + " " + sname + " " + "\nis on  " + appointDate + "at " + " " + appTime, "Appointment Time",
                     JOptionPane.INFORMATION_MESSAGE);
-
-
+        } else {
+            System.exit(0);
         }
+
+
     }// closes main
 
 
@@ -42,6 +49,9 @@ public class appointmentManager extends patientForm {
         String dayAsString,monthAsString;
         int day,month;
 
+
+        // code was gained from JB notes last year
+        
         if(d.length()==10)
         {
             if(Character.isDigit(d.charAt(0)) && Character.isDigit(d.charAt(1)) &&
